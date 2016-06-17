@@ -86,11 +86,11 @@ def createOraConnection(connect):
             password = getpass.getpass()
 
 
-        #dsn_tns = cx_Oracle.makedsn(hostname, port, service).replace('SID','SERVICE_NAME')
-        dsn_tns = '(DESCRIPTION_LIST=' + cx_Oracle.makedsn(hostname, port, service).replace('SID','SERVICE_NAME') + \
-                                         cx_Oracle.makedsn(hostname, port, service + '_' + hostname).replace('SID','SERVICE_NAME') + \
-                                         cx_Oracle.makedsn(hostname, port, service) + \
-                                         ')'
+        dsn_tns = hostname + ':' + str(port) + '/' + service
+        #dsn_tns = '(DESCRIPTION_LIST=' + cx_Oracle.makedsn(hostname, port, service).replace('SID','SERVICE_NAME') + \
+        #                                 cx_Oracle.makedsn(hostname, port, service + '_' + hostname).replace('SID','SERVICE_NAME') + \
+        #                                 cx_Oracle.makedsn(hostname, port, service) + \
+        #                                 ')'
 
         if user != 'sys':
             try:
