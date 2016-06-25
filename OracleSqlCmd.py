@@ -1,6 +1,6 @@
 
 
-import sys
+import sys, getpass
 try:
     import cx_Oracle
 except:
@@ -12,6 +12,7 @@ class oraConsole:
     def __init__(self):
         self.type      = 'Oracle'
         self.conn = None
+        self.curs = None
 
     def open(self, server=None, database=None, user=None, password=None):
         if server is None:
@@ -24,7 +25,7 @@ class oraConsole:
             user = input('User ==>')
 
         if password is None:
-            password = input('Password ==>')
+            password = getpass.getpass('Password ==>')
 
         if user.upper() == 'SYS':
             mode =  cx_Oracle.SYSDBA
@@ -34,3 +35,9 @@ class oraConsole:
         print('Connecting to ' +dsn)
         conn = cx_Oracle.connect(user, password, dsn, mode) 
         self.conn = conn 
+
+    def cmd(self):
+        sql_stmt = input('SQL> ')
+        self.curs = self.conn.cursor()
+        self.curs.execute(sql_stmt)
+        
