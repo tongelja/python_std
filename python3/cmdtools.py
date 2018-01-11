@@ -14,9 +14,7 @@ def templist():
     editor = os.getenv('EDITOR', 'vi')
     subprocess.call('%s %s' % (editor, path), shell=True)
 
-    f = open(path, 'r')
-    temp_data = list(f)
-    f.close()
+    with open(path) as x: temp_data = x.readlines()
 
     os.unlink(path)
 
