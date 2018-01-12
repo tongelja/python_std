@@ -1,4 +1,4 @@
 from  cmdtools import history
-from  SqlConsole import db
+from  sqlconsole import db
 
 
