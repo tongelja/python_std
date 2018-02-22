@@ -12,7 +12,18 @@ def history(history_id=None):
 #        print( str(history_id ) + ': ' + readline.get_history_item(history_id) ) 
         return readline.get_history_item(history_id)
 
+def tempscript():
+    (fd, path) = tempfile.mkstemp()
+    editor = os.getenv('EDITOR', 'vi')
+    subprocess.call('%s %s' % (editor, path), shell=True)
 
+    with open(path) as x: temp_data = x.read().replace('\n', ' ')
+
+    os.unlink(path)
+
+    return temp_data
+
+    
 def templist():
     (fd, path) = tempfile.mkstemp()
 
